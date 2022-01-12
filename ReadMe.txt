@@ -6,7 +6,7 @@ Conce, January 2022
 
 The files contained in this folder are for computing the examples in the paper
 
-	Parada Contzen, Miguel. 'Power factor control in distribution networks with strong presence of renewable generation', 2022.
+	Parada Contzen, Miguel. 'Power flow calculation and power factor control in distribution networks with strong presence of renewable generation.', 2022.
 
 The data files describe a 116 nodes balanced distribution circuit whose topology remains that of the IEEE 123 nodes benchmark. The nominal voltage is assummed to be V = 15[kV], although it can be changed in the Matlab script files. The original value of 4.16[kV] was discarded for the paper as it implies several voltage droop problems that scape from the scope of the study. Loads and DG is not based on the benchmark information but is rather arbitrary.
 

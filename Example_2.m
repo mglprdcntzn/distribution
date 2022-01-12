@@ -66,7 +66,7 @@ fprintf('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n')
         fprintf('   Max. Number of iterations: %i\n',maxit)
         fprintf('   Tolerance: %e\n',tol)
         
-    algo = 5; %1: NR-ClAsico; 2: NR-UW; 3: NR-IUW; 4: NR-IUWsimp; 5: CCSS
+    algo = 1; %1: NR-ClAsico; 2: NR-UW; 3: NR-IUW; 4: NR-IUWsimp; 5: CCSS
     if algo==1,
         algoritmo = 'NR-classic';        
     elseif algo==2,
@@ -303,7 +303,7 @@ fprintf('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n')
                    'Oct','Nov','Dec',...
                    'location','east',...
                    'orientation','vertical',...
-                   'location','SouthEast') 
+                   'location','NorthWest') 
             grid ON
                 hAx=gca;  % avoid repetitive function calls
                 set(hAx,'xminorgrid','off','yminorgrid','off')
@@ -917,7 +917,7 @@ if grafSimul,
             box ON
             set(gca,'XTick',hrs)
             set(gca,'XTickLabel',hrtext)
-            title('|v| [pu]')
+%             title('|v| [pu]')
             grid ON
                 hAx=gca;  % avoid repetitive function calls
                 set(hAx,'xminorgrid','off','yminorgrid','off')
@@ -928,7 +928,7 @@ if grafSimul,
             box ON
             set(gca,'XTick',hrs)
             set(gca,'XTickLabel',hrtext)
-            title('\angle v [°]')
+%             title('\angle v [°]')
             grid ON
                 hAx=gca;  % avoid repetitive function calls
                 set(hAx,'xminorgrid','off','yminorgrid','off')
@@ -949,7 +949,7 @@ if grafSimul,
             box ON
             set(gca,'XTick',hrs)
             set(gca,'XTickLabel',hrtext)
-            title('P_0 [MW]')
+%             title('P_0 [MW]')
             grid ON
                 hAx=gca;  % avoid repetitive function calls
                 set(hAx,'xminorgrid','off','yminorgrid','off')
@@ -975,7 +975,7 @@ if grafSimul,
             box ON
             set(gca,'XTick',hrs)
             set(gca,'XTickLabel',hrtext)
-            title('f_{p,0}')
+%             title('f_{p,0}')
             grid ON
                 hAx=gca;  % avoid repetitive function calls
                 set(hAx,'xminorgrid','off','yminorgrid','off')

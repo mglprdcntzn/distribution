@@ -9,7 +9,7 @@ clc
 rng(1); %random numbers seed
 fprintf('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n')  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    grafgrabar   = true;
+    grafgrabar   = false;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %some drawing constants
     ancho = 200;
@@ -689,13 +689,3 @@ if grafgrabar,
             print('-depsc','-r200',['fp',sufix]) % FunciOn para guardar .eps 
 end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    
-    
-    
-    
-    
-    
-    
-    
-    
-    
