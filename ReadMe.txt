@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Simulation files
 Miguel Parada Contzen
-Conce, January 2022
+Conce, July 2022
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The files contained in this folder are for computing the examples in the paper
@@ -70,3 +70,9 @@ Matlab simulation scripts:
 	- Example_1.m: Comparison between algorithms at one arbitrary instant.
 	- Example_2.m: Comparison between algorithms through one entire typical day in open loop behaviour. It also plots Load, Irradiation, and Wind Speed daily profiles.
 	- Example_3.m: Comparison between open and closed loop behaviour through one entire typical day.
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+33 nodes additional example:
+	- Algorithms33.m: An additional example (not included in the paper) to compare the algorithms with the 33 nodes system in:
+
+		S. H. Dolatabadi, M. Ghorbanian, P. Siano, N. D. Hatziargyriou, An enhanced IEEE 33 bus benchmark test system for distribution system studies, IEEE Transactions on Power Systems 36 (2021) 2565– 2572.

@@ -11,7 +11,7 @@ fprintf('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     ancho = 200;
     alto  = 200;
-    Fontsize = 12;
+    Fontsize = 24;
     
     grafPerfiles = false;
     grafSimul    = false;
@@ -65,8 +65,14 @@ fprintf('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n')
     terminator = 0;%0: h_I; 1: h_P
         fprintf('   Max. Number of iterations: %i\n',maxit)
         fprintf('   Tolerance: %e\n',tol)
+    initiator  = 0; %0: vant; 1: V
+        if initiator,
+            fprintf('   Initial condition for iterations: V\n')
+        else
+            fprintf('   Initial condition for iterations: vant\n')
+        end
         
-    algo = 1; %1: NR-ClAsico; 2: NR-UW; 3: NR-IUW; 4: NR-IUWsimp; 5: CCSS
+    algo = 5; %1: NR-ClAsico; 2: NR-UW; 3: NR-IUW; 4: NR-IUWsimp; 5: CCSS
     if algo==1,
         algoritmo = 'NR-classic';        
     elseif algo==2,
@@ -147,7 +153,7 @@ fprintf('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n')
                '18:00','','','','','','24:00'} ;
     if grafPerfiles,
         figure(1)
-            subplot(1,3,1)
+            subplot(2,2,[1 2])
             evalc('hold');
             plot(hrs,Phr(:,1),'-','LineWidth',1.5)
             plot(hrs,Phr(:,2),'--','LineWidth',1.5)
@@ -159,9 +165,11 @@ fprintf('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n')
                 hAx=gca;  % avoid repetitive function calls
                 set(hAx,'xminorgrid','off','yminorgrid','off')
             axis([hrs(1),hrs(end),0.3,1.1])
-            set(gca,'FontName','Times New Roman','FontSize',Fontsize);
+            set(gca,'FontName','Times New Roman','FontSize',Fontsize*3/4);
             legend('Com.','Res.','Ind.',...
-                   'location','south','orientation','horizontal') 
+                   'orientation','vertical',...
+                   'location','NorthWest')  
+%                    'location','south','orientation','horizontal') 
     end
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Time definitions
@@ -255,16 +263,20 @@ fprintf('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n')
     %Plot PV profiles
     if grafPerfiles,
         figure(1)
-            subplot(1,3,2)
-            plot(hrs,Perfiles,'-','LineWidth',1.5)
+            subplot(2,2,3)
+            plot(hrs,Perfiles(:,[1,4,7,10])/1000,'-','LineWidth',1.5)
             box ON
             set(gca,'XTick',hrs)
             set(gca,'XTickLabel',hrtext)
 %             title('Mean Global radiation $[W/m^2]$','Interpreter','LaTeX','FontName','Times New Roman');
-            legend('Jan','Feb','Mar',...
-                   'Apr','May','Jun',...
-                   'Jul','Agu','Sep',...
-                   'Oct','Nov','Dec',...
+%             legend('Jan','Feb','Mar',...
+%                    'Apr','May','Jun',...
+%                    'Jul','Agu','Sep',...
+%                    'Oct','Nov','Dec',...
+%                    'location','east',...
+%                    'orientation','vertical',...
+%                    'location','NorthWest') 
+            legend('Jan','Apr','Jul','Oct',...
                    'location','east',...
                    'orientation','vertical',...
                    'location','NorthWest')  
@@ -272,7 +284,7 @@ fprintf('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n')
                 hAx=gca;  % avoid repetitive function calls
                 set(hAx,'xminorgrid','off','yminorgrid','off')
             xlim([hrs(1),hrs(end)]);
-            set(gca,'FontName','Times New Roman','FontSize',Fontsize);
+            set(gca,'FontName','Times New Roman','FontSize',Fontsize*3/4);
     end
     %Wind profile   
     PerfilesEol      = csvread('PerfilEolCarrielSur.csv');
@@ -291,28 +303,32 @@ fprintf('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n')
     %Plot wind profile
     if grafPerfiles,
         figure(1)
-            subplot(1,3,3)
-            hplot = plot(hrs,Perfiles,'-','LineWidth',1.5);
+            subplot(2,2,4)
+            hplot = plot(hrs,Perfiles(:,[1,4,7,10]),'-','LineWidth',1.5);
             box ON
             set(gca,'XTick',hrs)
             set(gca,'XTickLabel',hrtext)
 %             title('Mean wind speed $[m/s]$ at $10[m]$','Interpreter','LaTeX','FontName','Times New Roman');
-            legend('Jan','Feb','Mar',...
-                   'Apr','May','Jun',...
-                   'Jul','Agu','Sep',...
-                   'Oct','Nov','Dec',...
+%             legend('Jan','Feb','Mar',...
+%                    'Apr','May','Jun',...
+%                    'Jul','Agu','Sep',...
+%                    'Oct','Nov','Dec',...
+%                    'location','east',...
+%                    'orientation','vertical',...
+%                    'location','NorthWest') 
+            legend('Jan','Apr','Jul','Oct',...
                    'location','east',...
                    'orientation','vertical',...
-                   'location','NorthWest') 
+                   'location','NorthWest')  
             grid ON
                 hAx=gca;  % avoid repetitive function calls
                 set(hAx,'xminorgrid','off','yminorgrid','off')
             xlim([hrs(1),hrs(end)]);
-            set(gca,'FontName','Times New Roman','FontSize',Fontsize);
+            set(gca,'FontName','Times New Roman','FontSize',Fontsize*3/4);
             
             set(gcf,'PaperUnits','centimeters',...
-                    'PaperSize',[3*ancho alto],...
-                    'PaperPosition',[0 0 3*ancho alto]); %[0 0 ancho alto]
+                    'PaperSize',[2*ancho 2*alto],...
+                    'PaperPosition',[0 0 2*ancho 2*alto]); %[0 0 ancho alto]
             if grafgrabar,
                 print('-depsc','-r200','Perfiles.eps') % FunciOn para guardar .eps 
             end
@@ -446,7 +462,11 @@ for kk=1:length(t),
                   + Peol(:,kk) + j*Qeol(:,kk) ); %wind
     %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     %Initial condition for iterations
-        VV   = diag(vant);
+        if initiator,
+            VV = V*Id;
+        else
+            VV   = diag(vant);
+        end
         RR   = abs(VV);
         PSI  = angle(VV);
         rp   = [RR*unos;PSI*unos];

@@ -9,12 +9,13 @@ clc
 rng(1); %random numbers seed
 fprintf('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n')  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-    grafgrabar   = false;
+    grafgrabar   = true;
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %some drawing constants
     ancho = 200;
     alto  = 200;
-    Fontsize = 12;
+    Fontsize = 24;
+    LineSize = 2;
 
     hrs  = 0:24;
     hrtext  = {'00:00','','','','','',...
@@ -129,7 +130,7 @@ fprintf('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n')
     epsilon = 0.01; %for noise component
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Time definitions
-    DT     = 0.5;%1;%10;% %sample period in minutes
+    DT     = 10;%0.5;%1;% %sample period in minutes
     t0     = 0; %begining 00:00hrs
     tf     = 24*60; %end 24:00hrs in minutes
     t      = t0:DT:tf; % time in minutes
@@ -237,7 +238,7 @@ fprintf('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n')
 % Power factor control
     fpref    = 0.90;
     fpmin    = 0.80;
-    Kfp      = 0*0.1;
+    Kfp      = 0*0.01;
     fprintf('   Proportional constant of fp ctrl: %1.2f\n',Kfp)
     fprintf('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n')  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -427,9 +428,9 @@ end
     figure(1)
         subplot(1,2,1)
             evalc('hold');
-            plot([t(kinic),t(end)]/60, [fpref,fpref],':','LineWidth',1.0)
-            plot(t(kinic:end)/60,SPfp(kinic:end-1),'--','LineWidth',1.0)
-            plot(t(kinic:end)/60,fp0(kinic:end),'-','LineWidth',1.5)
+            plot([t(kinic),t(end)]/60, [fpref,fpref],':','LineWidth',LineSize*0.75)
+            plot(t(kinic:end)/60,SPfp(kinic:end-1),'--','LineWidth',LineSize*0.75)
+            plot(t(kinic:end)/60,fp0(kinic:end),'-','LineWidth',LineSize)
             box ON
             set(gca,'XTick',hrs)
             set(gca,'XTickLabel',hrtext)
@@ -446,9 +447,7 @@ end
     fprintf('   Closed Loop\n')
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Power factor control
-    fpref    = 0.90;
-    fpmin    = 0.80;
-    Kfp      = 0.1;
+    Kfp      = 0.01;
     fprintf('   Proportional constant of fp ctrl: %1.2f\n',Kfp)
     fprintf('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n')  
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -638,14 +637,14 @@ end
     figure(1)
         subplot(1,2,2)
             evalc('hold');
-            plot([t(kinic),t(end)]/60, [fpref,fpref],':','LineWidth',1.0)
-            plot(t(kinic:end)/60,SPfp(kinic:end-1),'--','LineWidth',1.0)
-            plot(t(kinic:end)/60,fp0(kinic:end),'-','LineWidth',1.5)
+            plot([t(kinic),t(end)]/60, [fpref,fpref],':','LineWidth',LineSize*0.75)
+            plot(t(kinic:end)/60,SPfp(kinic:end-1),'--','LineWidth',LineSize*0.75)
+            plot(t(kinic:end)/60,fp0(kinic:end),'-','LineWidth',LineSize)
             box ON
             set(gca,'XTick',hrs)
             set(gca,'XTickLabel',hrtext)
             title('Closed loop')
-            legend('f_{p,ref}','f_{p,SP}','f_{p,0}','location','northeast')
+            legend('f_{p,ref}','f_{p,SP}','f_{p,0}','location','northwest')
             grid ON
                 hAx=gca;  % avoid repetitive function calls
                 set(hAx,'xminorgrid','off','yminorgrid','off')
