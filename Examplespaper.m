@@ -297,10 +297,10 @@ end
             evalc('hold');
             plot(t/60,fp0,'-','LineWidth',1.5)
             title('Open Loop')
-            legend({'$f_{p,0}$'},'location','northwest','Interpreter','latex')
+            legend({'$f_{p,0}$'},'location','southwest','Interpreter','latex')
             
             xlim([hrs(1),hrs(end)]);
-            ylim([fpmin,1]);
+            ylim([fpmin,0.95]);
             box ON
             grid ON
             hAx=gca;  % avoid repetitive function calls
@@ -346,6 +346,29 @@ end
                 'PaperPosition',[0 0 2*ancho alto]); %[0 0 ancho alto]
         print('-depsc','-r200',nombre) % FunciOn para guardar .eps
     end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % voltages
+    figure
+            evalc('hold');
+            plot(t/60,abs(ve)/V,'-','LineWidth',1.5)
+            title('Open Loop')
+            legend({'$v_{i}[p.u.]$'},'location','northwest','Interpreter','latex')
+            
+            xlim([hrs(1),hrs(end)]);
+            box ON
+            grid ON
+            hAx=gca;  % avoid repetitive function calls
+                set(hAx,'XTick',hrs)
+                set(hAx,'XTickLabel',hrtext)
+                set(hAx,'xminorgrid','off','yminorgrid','off')
+                set(hAx,'Layer','top');
+                set(gca,'FontName','Times New Roman','FontSize',Fontsize);
+                ylimits = ylim;
+                rect=rectangle('Position',[tuprise,ylimits(1),tdwrise-tuprise,ylimits(2)-ylimits(1)],...
+                               'FaceColor',[255 255 230]/255,...
+                               'EdgeColor',[20 20 20]/255,'LineStyle',':');
+                uistack(rect,'bottom') ;
+                ylim(ylimits);
 % %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     % Potencias carga y PV
     figure
@@ -646,9 +669,9 @@ end
             plot(t/60,fref(1:end-1),':','LineWidth',1.5)
             plot(t/60,fp0,'-','LineWidth',1.5)
             title('Closed Loop')
-            legend({'$f_{p,SP}$','$f_{ref}$','$f_{p,0}$'},'location','northwest','Interpreter','latex')
+            legend({'$f_{p,SP}$','$f_{ref}$','$f_{p,0}$'},'location','southwest','Interpreter','latex')
             xlim([hrs(1),hrs(end)]);
-            ylim([0.85,1]);
+            ylim([0.85,0.95]);
             box ON
             grid ON
             hAx=gca;  % avoid repetitive function calls
@@ -697,6 +720,29 @@ end
                 'PaperPosition',[0 0 2*ancho alto]); %[0 0 ancho alto]
         print('-depsc','-r200',nombre) % FunciOn para guardar .eps
     end
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+    % voltages
+    figure
+            evalc('hold');
+            plot(t/60,abs(ve)/V,'-','LineWidth',1.5)
+            title('Closed Loop')
+            legend({'$v_{i}[p.u.]$'},'location','northwest','Interpreter','latex')
+            
+            xlim([hrs(1),hrs(end)]);
+            box ON
+            grid ON
+            hAx=gca;  % avoid repetitive function calls
+                set(hAx,'XTick',hrs)
+                set(hAx,'XTickLabel',hrtext)
+                set(hAx,'xminorgrid','off','yminorgrid','off')
+                set(hAx,'Layer','top');
+                set(gca,'FontName','Times New Roman','FontSize',Fontsize);
+                ylimits = ylim;
+                rect=rectangle('Position',[tuprise,ylimits(1),tdwrise-tuprise,ylimits(2)-ylimits(1)],...
+                               'FaceColor',[255 255 230]/255,...
+                               'EdgeColor',[20 20 20]/255,'LineStyle',':');
+                uistack(rect,'bottom') ;
+                ylim(ylimits);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % approximated and actual power at substation
     figure
