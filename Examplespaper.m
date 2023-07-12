@@ -114,7 +114,7 @@ fprintf('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n')
     t      = t0:h:tf; % time in minutes
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 % Seasons of the year
-    mes    = 1; %month of the year
+    mes    = 1; %month of the year / January=1 is summer
     fprintf('   Month of the year: %i\n',mes)
     %Load parameters
     if mes>11 || mes <3, %if summer
@@ -1250,10 +1250,14 @@ end
                 ylim(ylimits);
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
     fprintf('   Power constant values\n')
+        fprintf('    Instaled C Shunt: %f [kVAr]\n',sum(Qcomp)*1e-3)
         fprintf('    Instaled PV gen: %f [MW]\n',PPVmax*1e-6)
         fprintf('    Instaled Electrolizers: %f [MW]\n',PH2Tot*1e-6)
         fprintf('    Instaled FC gen: %f [MW]\n',PFCTot*1e-6)
         fprintf('    Max. PV gen: %f [MW]\n',max(sum(Psolar,1)*1e-6))
+        fprintf('    Max. P load: %f [MW]\n',max(sum(Pload,1)*1e-6))
+        fprintf('    Min. P load: %f [MW]\n',min(sum(Pload,1)*1e-6))
+        fprintf('    Max.PV gen / Min. P load ratio: %f [%%]\n',100*max(sum(Psolar,1))/min(sum(Pload,1)))
         fprintf('    Open Loop Min. P0: %f [MW]\n',P0minOL*1e-6)
         fprintf('    Open Loop Max. P0: %f [MW]\n',P0maxOL*1e-6)
         fprintf('    Min. P0 ref: %f [MW]\n',p0min*1e-6)
@@ -1285,5 +1289,6 @@ end
         fprintf('    Net hydrogen gain: %f [kWhr]\n',(EH2-EFC)*1e-3)
         fprintf('    Daily energy injected by PV: %f [MWhr]\n',EPV*1e-6)
         fprintf('    Load daily energy demand: %f [MWhr]\n',Eload*1e-6)
+        fprintf('    daily energy PV/Load ratio: %f [%%]\n',EPV/Eload*100)
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 fprintf('%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%\n')

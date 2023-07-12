@@ -1,7 +1,7 @@
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Simulation files
 Miguel Parada Contzen
-Conce, October 2022
+Conce, July 2023
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 The files contained in this folder are for computing the examples in the paper
@@ -62,3 +62,4 @@ Data Files:
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 Matlab simulation scripts:
 	- Examplespaper.m: Closed and open loop simulation of described system and power control algorithm.
+	- Example_VoltVAR.m: Additional simulaltion to show a VoltVAR based control for PV injection (w/o H2). It shows that overcompensation can be easily reached, sacrificing the PV injection power factor to obtain an artificially hight substation power factor. It does  not consider additionally aggregated load management. Figures are not shown in the paper because of space limitations.
