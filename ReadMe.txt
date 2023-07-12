@@ -6,7 +6,7 @@ Conce, July 2023
 
 The files contained in this folder are for computing the examples in the paper
 
-	Parada Contzen, Miguel. 'Medium voltage level power control using distributed PV generation and hydrogen storage.', 2022.
+	Parada Contzen, Miguel. 'Medium voltage level power control using distributed PV generation and hydrogen storage.', 2023.
 
 The data files describe a 116 nodes balanced distribution circuit whose topology remains that of the IEEE 123 nodes benchmark. The nominal voltage is assummed to be V = 15[kV], although it can be changed in the Matlab script files. The original value of 4.16[kV] was discarded for the paper as it implies several voltage droop problems that scape from the scope of the study. Loads and DG is not based on the benchmark information but is rather arbitrary.
 
@@ -60,6 +60,6 @@ Data Files:
 		- Twelfth column: Clouds probability
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-Matlab simulation scripts:
+Simulation scripts:
 	- Examplespaper.m: Closed and open loop simulation of described system and power control algorithm.
 	- Example_VoltVAR.m: Additional simulaltion to show a VoltVAR based control for PV injection (w/o H2). It shows that overcompensation can be easily reached, sacrificing the PV injection power factor to obtain an artificially hight substation power factor. It does  not consider additionally aggregated load management. Figures are not shown in the paper because of space limitations.
